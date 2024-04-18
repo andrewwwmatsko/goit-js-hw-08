@@ -72,10 +72,21 @@ const imgs = images
   .map((image) => {
     return `<li class="gallery-item">
                 <a class="gallery-link" href="${image.original}">
-                    <img class="gallery-image" src="${image.preview}" [data-source="${image.original}"] alt="${image.description}">
+                    <img class="gallery-image" src="${image.preview}" data-source="${image.original}" alt="${image.description}">
                 </a>
             </li>`;
   })
   .join("");
 
 gallery.insertAdjacentHTML("afterbegin", imgs);
+
+gallery.addEventListener("click", (e) => {
+  e.preventDefault();
+  const linkToBigImage = e.target.dataset.source;
+
+  const instance = basicLightbox.create(`
+    <img src="${linkToBigImage}" width="800" height="600">
+`);
+
+  instance.show();
+});
