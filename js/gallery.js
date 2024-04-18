@@ -82,6 +82,10 @@ gallery.insertAdjacentHTML("afterbegin", imgs);
 
 gallery.addEventListener("click", (e) => {
   e.preventDefault();
+
+  if (e.target.nodeName !== "IMG") {
+    return;
+  }
   const linkToBigImage = e.target.dataset.source;
 
   const instance = basicLightbox.create(`
